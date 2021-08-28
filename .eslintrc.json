@@ -15,11 +15,25 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 12,
+    "ecmaVersion": 2020,
     "sourceType": "module"
   },
   "rules": {
-    "import/no-unresolved": "error"
+    "import/no-unresolved": "error",
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ],
+   "no-use-before-define": "off",
+   "@typescript-eslint/no-use-before-define": "off",
+   "no-param-reassign": "off"
   },
   "settings": {
     "import/resolver": {
