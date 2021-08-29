@@ -17,3 +17,8 @@
     url('./fonts/Gilroy-Medium.ttf') format('truetype');
   font-weight: lighter;
 }
+
+html, body {
+  margin:0px;
+  height:100%;
+}
