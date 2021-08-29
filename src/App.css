@@ -1,0 +1,68 @@
+body {
+  background-color: #14173D;
+}
+
+p {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-size: 12pt;
+  line-height: 18pt;
+  text-align: left;
+  color: #EA573E;
+}
+
+h1 {
+  font-family: 'GilroyBold';
+  font-size: 18pt;
+  line-height: 24pt;
+  text-align: center;
+  color: #EA573E;
+}
+
+h2 {
+  font-family: 'GilroyMedium';
+  font-size: 18pt;
+  line-height: 24pt;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+h3 {
+  font-family: 'GilroyMedium';
+  font-size: 18pt;
+  line-height: 24pt;
+  text-align: center;
+  color: #14173D;
+}
+
+h4 {
+  font-family: 'GilroyMedium';
+  font-size: 12pt;
+  line-height: 24pt;
+  text-align: left;
+  color: #14173D;
+}
+
+h5 {
+  font-family: 'GilroyMedium';
+  font-size: 12pt;
+  line-height: 24pt;
+  text-align: left;
+  color: #1FD6BA;
+}
+
+h6 {
+  font-family: 'GilroyMedium';
+  font-size: 12pt;
+  line-height: 24pt;
+  text-align: left;
+  color: #EA573E;
+}
+
+button {
+  font-family: 'GilroyBold';
+  font-size: 18pt;
+  line-height: 24pt;
+  text-align: left;
+  color: #EA573E;
+}

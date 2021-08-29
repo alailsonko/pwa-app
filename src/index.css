@@ -15,9 +15,5 @@
   font-family: 'GilroyMedium';
   src: local('GilroyMedium'),
     url('./fonts/Gilroy-Medium.ttf') format('truetype');
-  font-weight: 500;
-}
-
-a {
-  font-family: 'GilroyRegular';
+  font-weight: lighter;
 }
