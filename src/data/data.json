@@ -1,0 +1,64 @@
+{
+    "onboarded": false,
+    "user": {
+        "name": "John",
+        "surname": "Cena",
+        "displayName": "Invisible John",
+        "password": "PasswordPlease123",
+        "contact": {
+            "email": "john.cena@wwe.com",
+            "phoneNumber": "123456789",
+            "locations": [
+                {
+                    "id": "1dd5d80a-7593-ea11-a811-000d3ab25f82",
+                    "name": "address",
+                    "location": {
+                        "latitude": 50.10281,
+                        "longitude": 14.44584
+                    },
+                    "address": {
+                        "streetName": "Dělnická",
+                        "streetNumber": "12",
+                        "suburb": "Praha 7",
+                        "stateOrProvince": "Hlavní město Praha",
+                        "complex": "Rosmarin Business Center",
+                        "postalCode": "17000",
+                        "city": "Prague",
+                        "country": "CZ",
+                        "addressString": "12, Dělnická 12, 170 00 Praha 7-Holešovice, Česk"
+                    }
+                },
+                {
+                    "id": "1dd5d80a-7593-ea11-a811-000d3ab20000",
+                    "name": "workplace",
+                    "location": {
+                        "latitude": 50.14748,
+                        "longitude": 14.53163
+                    },
+                    "address": {
+                        "streetName": "Rýnská",
+                        "streetNumber": "1",
+                        "suburb": "Praha-Čakovice",
+                        "stateOrProvince": "Hlavní město Praha",
+                        "postalCode": "19600",
+                        "city": "Prague",
+                        "country": "CZ",
+                        "addressString": "Rýnská 948/1, 196 00 Praha-Čakovice, Czechia"
+                    }
+                }
+            ],
+            "socialNetworks": [
+                {
+                    "id": "linkedIn",
+                    "name": "Linked In",
+                    "url": "https://www.linkedin.com/company/zentity-a-s-/"
+                },
+                {
+                    "id": "twitter",
+                    "name": "Twitter",
+                    "url": "https://twitter.com/thezentity"
+                }
+            ]
+        }
+    }
+}
