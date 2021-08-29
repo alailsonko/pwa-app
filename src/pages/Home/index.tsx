@@ -1,9 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import ArrowForward from '@material-ui/icons/ArrowForwardIos';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import Slash from '../../assets/Slash@2x.png';
 import Logo from '../../assets/Logo Icon@1x.png';
 import Code from '../../assets/Code@3x.png';
@@ -22,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '6vh',
   },
   button: {
-    margin: theme.spacing(1),
     fontFamily: 'GilroyBold',
     fontSize: '18pt',
     lineHeight: '24pt',
@@ -136,10 +134,12 @@ const Home: React.FC = () => {
             <span>assignment at ZENTITY.</span>
           </h1>
         </div>
-        <Button size="large" className={classes.button}>
-          Start
-          <ArrowForward className={classes.extendedIcon} />
-        </Button>
+        <Link to="/register" className={classes.alignItemsColumn}>
+          <Button size="large" className={classes.button}>
+            Start
+            <ArrowForward className={classes.extendedIcon} />
+          </Button>
+        </Link>
       </div>
     </>
   );

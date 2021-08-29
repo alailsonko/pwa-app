@@ -66,3 +66,8 @@ button {
   text-align: left;
   color: #EA573E;
 }
+
+a {
+  margin: 0;
+  padding: 0;
+}
