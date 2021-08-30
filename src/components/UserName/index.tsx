@@ -12,15 +12,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserName: React.FC = () => {
-  const classes = useStyles();
-  const globalClasses = useGlobalStyles();
+interface Props {
+  title: string;
+  classStyle: string;
+}
 
+const UserName: React.FC<Props> = (props: Props) => {
+  const classes = useStyles();
+  const { classStyle, title } = props;
   return (
     <div>
-      <h2 className={globalClasses.h2}>
+      <h2 className={classStyle}>
         <img src={Slash} className={classes.slashIcon} alt="Remove this" />
-        John Cena
+        {title}
       </h2>
     </div>
   );
