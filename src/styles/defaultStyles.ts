@@ -35,6 +35,14 @@ const useGlobalStyles = makeStyles((theme) => ({
   extendedIcon: {
     marginLeft: theme.spacing(9),
   },
+  p: {
+    fontFamily: 'Open Sans',
+    fontSize: '12pt',
+    lineHeight: '18pt',
+    textAlign: 'left',
+    color: '#FFFFFF',
+    fontWeight: 'normal',
+  },
   h1: {
     fontFamily: 'GilroyBold',
     fontSize: '18pt',
