@@ -10,7 +10,7 @@ import Logo from '../../components/Logo';
 import UserName from '../../components/UserName';
 import Error from '../../components/Error';
 import User from '../../assets/User@3x.png';
-import ErrorIcon from '../../assets/Error@3x.png';
+import PasswordIcon from '../../assets/Password@3x.png';
 import useGlobalStyles from '../../styles/defaultStyles';
 
 const BootstrapInput = withStyles((theme) => ({
@@ -53,13 +53,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const schema = yup.object().shape({
+const schemaUsername = yup.object().shape({
   username: yup
     .string()
-    .min(3)
-    .max(20)
+    .min(3, 'lengthError')
+    .max(20, 'lengthError')
     .matches(/^[a-zA-Z0-9\s]+$/, 'matchesError')
     .required('lengthError'),
+});
+
+const schema = yup.object().shape({
+  password: yup
+    .string()
+    .min(9, 'lengthPasswordError')
+    .required('lengthPasswordError'),
+  passwordConfirm: yup
+    .string()
+    .min(9, 'lengthPasswordError')
+    .oneOf([yup.ref('password'), null], 'matchesPasswordError'),
 });
 
 interface IValid {
@@ -70,6 +81,7 @@ interface IValid {
 interface IRegisterData {
   username?: IValid;
   password?: IValid;
+  passwordConfirm?: IValid;
 }
 
 const Register: React.FC = () => {
@@ -87,12 +99,16 @@ const Register: React.FC = () => {
       value: '',
       isValid: false,
     },
+    passwordConfirm: {
+      value: '',
+      isValid: false,
+    },
   });
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (registerData.username) {
-      schema
+    if (registerData.username && !registerData.username.isValid) {
+      schemaUsername
         .validate(
           {
             username: registerData.username.value,
@@ -101,6 +117,7 @@ const Register: React.FC = () => {
         )
         .then((valid) => {
           setRegisterData({
+            ...registerData,
             username: {
               value: valid.username,
               isValid: true,
@@ -112,15 +129,70 @@ const Register: React.FC = () => {
             setError(
               'Ooops! Your username must contain only letters, numbers and spaces.'
             );
+          } else if (err.message === 'lengthError') {
+            setError(
+              'Ooops! Your username must be between 3 and 20 characters long.'
+            );
+          } else {
+            setError(
+              'Ooops! Your username must be between 3 and 20 characters long.'
+            );
           }
         });
     }
+    if (
+      registerData.username &&
+      registerData.username.isValid &&
+      registerData.password &&
+      !registerData.password.isValid &&
+      registerData.passwordConfirm &&
+      !registerData.passwordConfirm.isValid
+    ) {
+      schema
+        .validate(
+          {
+            password: registerData.password.value,
+            passwordConfirm: registerData.passwordConfirm.value,
+          },
+          { abortEarly: false }
+        )
+        .then((valid) => {
+          setRegisterData({
+            ...registerData,
+            password: {
+              value: valid.password,
+              isValid: true,
+            },
+            passwordConfirm: {
+              value: valid.password,
+              isValid: true,
+            },
+          });
+          console.log('success');
+        })
+        .catch((err: Error) => {
+          if (err.message === 'matchesPasswordError') {
+            setError(
+              "Ooops! Those passwords don't match. Try it again, please."
+            );
+          } else if (err.message === 'lengthPasswordError') {
+            setError(
+              'Ooops! That password is too weak. Password must be at least 9 characters long'
+            );
+          } else {
+            setError(
+              'Ooops! That password is too weak. Password must be at least 9 characters long'
+            );
+          }
+        });
+    }
+    return null;
   };
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setError('');
-    setRegisterData({ [name]: { value } });
+    setRegisterData({ ...registerData, [name]: { value, isValid: false } });
   };
 
   return (
@@ -128,25 +200,66 @@ const Register: React.FC = () => {
       <div className={globalClasses.container}>
         <Logo />
         <UserName />
-        <div className={globalClasses.alignItemsColumn}>
-          <img src={User} className={classes.userIcon} alt="Remove this" />
-          <h1 className={globalClasses.h1}>
-            <span>Start by setting up</span>
-            <br />
-            <span>your username.</span>
-          </h1>
-        </div>
+        {registerData.username && !registerData.username.isValid ? (
+          <div className={globalClasses.alignItemsColumn}>
+            <img src={User} className={classes.userIcon} alt="user" />
+            <h1 className={globalClasses.h1}>
+              <span>Start by setting up</span>
+              <br />
+              <span>your username.</span>
+            </h1>
+          </div>
+        ) : (
+          <div className={globalClasses.alignItemsColumn}>
+            <img src={PasswordIcon} className={classes.userIcon} alt="user" />
+            <h1 className={globalClasses.h1}>
+              <span>Great, now your</span>
+              <br />
+              <span>password, please.</span>
+            </h1>
+          </div>
+        )}
+
         <form className={globalClasses.alignItemsColumn}>
-          <BootstrapInput
-            style={{
-              border: error ? '2px solid #EA573E' : '2px solid #FFFFFF',
-              color: error ? '#EA573E' : '#FFFFFF',
-            }}
-            placeholder="Here, please!"
-            id="username"
-            name="username"
-            onChange={handleChange}
-          />
+          {registerData.username && !registerData.username.isValid ? (
+            <BootstrapInput
+              style={{
+                border: error ? '2px solid #EA573E' : '2px solid #FFFFFF',
+                color: error ? '#EA573E' : '#FFFFFF',
+              }}
+              placeholder="Here, please!"
+              id="username"
+              name="username"
+              onChange={handleChange}
+            />
+          ) : (
+            <>
+              <BootstrapInput
+                style={{
+                  border: error ? '2px solid #EA573E' : '2px solid #FFFFFF',
+                  color: error ? '#EA573E' : '#FFFFFF',
+                  marginBottom: '20px',
+                }}
+                placeholder="Make it strong!"
+                id="password"
+                name="password"
+                onChange={handleChange}
+                type="password"
+              />
+              <BootstrapInput
+                style={{
+                  border: error ? '2px solid #EA573E' : '2px solid #FFFFFF',
+                  color: error ? '#EA573E' : '#FFFFFF',
+                }}
+                placeholder="And once again..."
+                id="passwordConfirm"
+                name="passwordConfirm"
+                onChange={handleChange}
+                type="password"
+              />
+            </>
+          )}
+
           {error ? <Error error={error} /> : null}
           <div className={globalClasses.alignItemsColumn}>
             <Button
