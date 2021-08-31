@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
   iconWrapper: {
     position: 'absolute',
-    bottom: theme.spacing(1.4),
+    bottom: theme.spacing(2.4),
     right: '0',
   },
 }));
@@ -123,6 +123,7 @@ const InputField: React.FC<Props> = (props: Props) => {
             ? {
                 border: '2px solid #1FD6BA',
                 paddingRight: '108px',
+                marginBottom: '10px',
               }
             : {}
         }
