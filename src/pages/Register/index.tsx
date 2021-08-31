@@ -199,7 +199,7 @@ const Register: React.FC = () => {
     <>
       <div className={globalClasses.container}>
         <Logo />
-        <UserName />
+        <UserName classStyle={globalClasses.h2} title="John Cena" />
         {registerData.username && !registerData.username.isValid ? (
           <div className={globalClasses.alignItemsColumn}>
             <img src={User} className={classes.userIcon} alt="user" />
