@@ -1,8 +1,10 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState } from 'react';
-import './styles.css';
+import React, { useState, useEffect } from 'react';
 import ArrowBack from '@material-ui/icons/ArrowBackIos';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import ArrowForward from '@material-ui/icons/ArrowForwardIos';
+import { Link } from 'react-router-dom';
 import Logo from '../../components/Logo';
 import InputField from '../../components/InputField';
 import UserName from '../../components/UserName';
@@ -38,6 +40,25 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(1.4),
     right: '0',
   },
+  button: {
+    fontFamily: 'GilroyBold',
+    fontSize: '18pt',
+    lineHeight: '24pt',
+    textAlign: 'left',
+    color: '#EA573E',
+    textTransform: 'none',
+    border: '2px solid #EA573E',
+    borderRadius: '0',
+    padding: '10pt',
+    // position: 'absolute',
+    bottom: '6vh',
+    '&:hover': {
+      backgroundColor: '#FFFFFF',
+      border: '2px solid #EA573E',
+      color: '#EA573E',
+      boxShadow: 'none',
+    },
+  },
 }));
 
 interface IFieldEditUser {
@@ -48,6 +69,12 @@ interface IFieldEditUser {
 interface IEditUser {
   name: IFieldEditUser;
   username: IFieldEditUser;
+  address: IFieldEditUser;
+  city: IFieldEditUser;
+  postalCode: IFieldEditUser;
+  email: IFieldEditUser;
+  phone: IFieldEditUser;
+  socialMedia: IFieldEditUser;
 }
 
 const initialStateEditUser: IEditUser = {
@@ -59,13 +86,39 @@ const initialStateEditUser: IEditUser = {
     value: '',
     isEditing: false,
   },
+  address: {
+    value: '',
+    isEditing: false,
+  },
+  city: {
+    value: '',
+    isEditing: false,
+  },
+  postalCode: {
+    value: '',
+    isEditing: false,
+  },
+  email: {
+    value: '',
+    isEditing: false,
+  },
+  phone: {
+    value: '',
+    isEditing: false,
+  },
+  socialMedia: {
+    value: '',
+    isEditing: false,
+  },
 };
 
 const EditUser: React.FC = () => {
   const classes = useStyles();
   const globalClasses = useGlobalStyles();
   const [editUser, setEditUser] = useState<IEditUser>(initialStateEditUser);
-
+  useEffect(() => {
+    document.body.style.backgroundColor = '#FFFFFF';
+  }, []);
   const testingHandleEditButton = (name: string, value: string) => {
     console.log(name, value);
     setEditUser({
@@ -141,6 +194,78 @@ const EditUser: React.FC = () => {
         labelName="Username"
         nameInput="username"
       />
+      <InputField
+        field={editUser.address}
+        handleCancelButton={testingHandleCancelButton}
+        handleSaveButton={testingHandleSaveButton}
+        handleEditButton={testingHandleEditButton}
+        handleOnChange={testingHandleOnChange}
+        idInput="address"
+        initialValue="Delnicka 12"
+        labelName="Address"
+        nameInput="address"
+      />
+      <InputField
+        field={editUser.city}
+        handleCancelButton={testingHandleCancelButton}
+        handleSaveButton={testingHandleSaveButton}
+        handleEditButton={testingHandleEditButton}
+        handleOnChange={testingHandleOnChange}
+        idInput="city"
+        initialValue="Prague 7"
+        labelName="City"
+        nameInput="city"
+      />
+      <InputField
+        field={editUser.postalCode}
+        handleCancelButton={testingHandleCancelButton}
+        handleSaveButton={testingHandleSaveButton}
+        handleEditButton={testingHandleEditButton}
+        handleOnChange={testingHandleOnChange}
+        idInput="postalCode"
+        initialValue="170 00"
+        labelName="Postal Code"
+        nameInput="postalCode"
+      />
+      <InputField
+        field={editUser.email}
+        handleCancelButton={testingHandleCancelButton}
+        handleSaveButton={testingHandleSaveButton}
+        handleEditButton={testingHandleEditButton}
+        handleOnChange={testingHandleOnChange}
+        idInput="email"
+        initialValue="john.cena@wwe.com"
+        labelName="E-mail"
+        nameInput="email"
+      />
+      <InputField
+        field={editUser.phone}
+        handleCancelButton={testingHandleCancelButton}
+        handleSaveButton={testingHandleSaveButton}
+        handleEditButton={testingHandleEditButton}
+        handleOnChange={testingHandleOnChange}
+        idInput="phone"
+        initialValue="+420 123 456 789"
+        labelName="Phone"
+        nameInput="phone"
+      />
+      <InputField
+        field={editUser.socialMedia}
+        handleCancelButton={testingHandleCancelButton}
+        handleSaveButton={testingHandleSaveButton}
+        handleEditButton={testingHandleEditButton}
+        handleOnChange={testingHandleOnChange}
+        idInput="socialMedia"
+        initialValue="Linked"
+        labelName="Social Media"
+        nameInput="socialMedia"
+      />
+      <div className={globalClasses.alignItemsColumn}>
+        <Button size="large" className={classes.button}>
+          Logout
+          <ArrowForward className={globalClasses.extendedIcon} />
+        </Button>
+      </div>
     </div>
   );
 };
