@@ -13,7 +13,7 @@ const Home: React.FC = () => {
     <>
       <div className={globalClasses.container}>
         <Logo />
-        <UserName />
+        <UserName classStyle={globalClasses.h2} title="John Cena" />
         <WelcomeMessage />
         <Link to="/register" className={globalClasses.alignItemsColumn}>
           <Button size="large" className={globalClasses.button}>
