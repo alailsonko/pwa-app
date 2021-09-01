@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
 
 interface PrivateRouteProps extends RouteProps {
@@ -12,7 +12,9 @@ const PrivateRoute: React.FC<PrivateRouteProps> = (
   props: PrivateRouteProps
 ) => {
   const { component: Component, isLogged, ...rest } = props;
-
+  useEffect(() => {
+    document.body.style.backgroundColor = '#FFFFFF';
+  }, []);
   return (
     <Route
       {...rest}
