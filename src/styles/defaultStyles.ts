@@ -23,8 +23,9 @@ const useGlobalStyles = makeStyles((theme) => ({
     border: '2px solid #FFFFFF',
     borderRadius: '0',
     padding: '10pt',
-    position: 'absolute',
-    bottom: '6vh',
+    // position: 'absolute',
+    bottom: '1vh',
+    marginBottom: '10px',
     '&:hover': {
       backgroundColor: '#FFFFFF',
       border: '2px solid #EA573E',
