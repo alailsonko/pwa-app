@@ -1,4 +1,9 @@
-import { SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from './signup.types';
+import {
+  SIGNUP_FAILURE,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  LOGOUT,
+} from './signup.types';
 
 const initialState = {
   loading: false,
@@ -37,6 +42,11 @@ export default function signup(
         session: {},
         isLogged: false,
         error: action.payload,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        isLogged: false,
       };
     default:
       return state;

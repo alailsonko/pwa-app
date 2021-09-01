@@ -1,21 +1,26 @@
 import { Dispatch } from 'redux';
 import api from '../../../api';
 
-import { SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from './signup.types';
+import {
+  SIGNUP_FAILURE,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  LOGOUT,
+} from './signup.types';
 
 interface AddAccount {
   username: string;
   password: string;
 }
 
-export const signupRequest = () => ({
-  type: SIGNUP_REQUEST,
-});
-
 interface ActionDispatchType {
   type: string;
   payload?: any;
 }
+
+export const signupRequest = () => ({
+  type: SIGNUP_REQUEST,
+});
 
 export const signupSuccess = (signupData: AddAccount) => ({
   type: SIGNUP_SUCCESS,
@@ -36,3 +41,11 @@ export const signup =
       .then((response: any) => dispatch(signupSuccess(response.data)))
       .catch((error: any) => dispatch(signupFailure(error.message)));
   };
+
+export const logoutSuccess = () => ({
+  type: LOGOUT,
+});
+
+export const logout = () => async (dispatch: Dispatch<ActionDispatchType>) => {
+  dispatch(logoutSuccess());
+};
