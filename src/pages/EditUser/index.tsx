@@ -4,8 +4,7 @@ import ArrowBack from '@material-ui/icons/ArrowBackIos';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import ArrowForward from '@material-ui/icons/ArrowForwardIos';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 import Logo from '../../components/Logo';
 import InputField from '../../components/InputField';
 import UserName from '../../components/UserName';
@@ -75,7 +74,7 @@ interface IEditUser {
   city: IFieldEditUser;
   postalCode: IFieldEditUser;
   email: IFieldEditUser;
-  phone: IFieldEditUser;
+  phoneNumber: IFieldEditUser;
   socialMedia: IFieldEditUser;
 }
 
@@ -104,7 +103,7 @@ const initialStateEditUser: IEditUser = {
     value: '',
     isEditing: false,
   },
-  phone: {
+  phoneNumber: {
     value: '',
     isEditing: false,
   },
@@ -114,12 +113,16 @@ const initialStateEditUser: IEditUser = {
   },
 };
 
-const EditUser: React.FC = () => {
+interface Props {
+  session: any;
+}
+
+const EditUser: React.FC<Props> = (props: Props) => {
   const classes = useStyles();
   const globalClasses = useGlobalStyles();
   const dispatch = useDispatch();
   const [editUser, setEditUser] = useState<IEditUser>(initialStateEditUser);
-
+  const { session } = props;
   const testingHandleEditButton = (name: string, value: string) => {
     console.log(name, value);
     setEditUser({
@@ -180,7 +183,7 @@ const EditUser: React.FC = () => {
         handleEditButton={testingHandleEditButton}
         handleOnChange={testingHandleOnChange}
         idInput="name"
-        initialValue="John Cena"
+        initialValue={`${session.name} ${session.surname}`}
         labelName="name"
         nameInput="name"
       />
@@ -191,7 +194,7 @@ const EditUser: React.FC = () => {
         handleEditButton={testingHandleEditButton}
         handleOnChange={testingHandleOnChange}
         idInput="username"
-        initialValue="Invisible john"
+        initialValue={session.displayName}
         labelName="Username"
         nameInput="username"
       />
@@ -202,7 +205,7 @@ const EditUser: React.FC = () => {
         handleEditButton={testingHandleEditButton}
         handleOnChange={testingHandleOnChange}
         idInput="address"
-        initialValue="Delnicka 12"
+        initialValue={`${session.contact.locations[0].address.streetName} ${session.contact.locations[0].address.streetNumber}`}
         labelName="Address"
         nameInput="address"
       />
@@ -213,7 +216,7 @@ const EditUser: React.FC = () => {
         handleEditButton={testingHandleEditButton}
         handleOnChange={testingHandleOnChange}
         idInput="city"
-        initialValue="Prague 7"
+        initialValue={session.contact.locations[0].address.suburb}
         labelName="City"
         nameInput="city"
       />
@@ -224,7 +227,7 @@ const EditUser: React.FC = () => {
         handleEditButton={testingHandleEditButton}
         handleOnChange={testingHandleOnChange}
         idInput="postalCode"
-        initialValue="170 00"
+        initialValue={session.contact.locations[0].address.postalCode}
         labelName="Postal Code"
         nameInput="postalCode"
       />
@@ -235,20 +238,20 @@ const EditUser: React.FC = () => {
         handleEditButton={testingHandleEditButton}
         handleOnChange={testingHandleOnChange}
         idInput="email"
-        initialValue="john.cena@wwe.com"
+        initialValue={session.contact.email}
         labelName="E-mail"
         nameInput="email"
       />
       <InputField
-        field={editUser.phone}
+        field={editUser.phoneNumber}
         handleCancelButton={testingHandleCancelButton}
         handleSaveButton={testingHandleSaveButton}
         handleEditButton={testingHandleEditButton}
         handleOnChange={testingHandleOnChange}
-        idInput="phone"
-        initialValue="+420 123 456 789"
+        idInput="phoneNumber"
+        initialValue={session.contact.phoneNumber}
         labelName="Phone"
-        nameInput="phone"
+        nameInput="phoneNumber"
       />
       <InputField
         field={editUser.socialMedia}
@@ -257,7 +260,7 @@ const EditUser: React.FC = () => {
         handleEditButton={testingHandleEditButton}
         handleOnChange={testingHandleOnChange}
         idInput="socialMedia"
-        initialValue="Linked"
+        initialValue={session.contact.socialNetworks[0].name}
         labelName="Social Media"
         nameInput="socialMedia"
       />
@@ -275,4 +278,8 @@ const EditUser: React.FC = () => {
   );
 };
 
-export default EditUser;
+const mapStateToProps = (state: any) => ({
+  session: state.signup.session,
+});
+
+export default connect(mapStateToProps)(EditUser);
