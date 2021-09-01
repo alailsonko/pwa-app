@@ -1,15 +1,17 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ArrowBack from '@material-ui/icons/ArrowBackIos';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import ArrowForward from '@material-ui/icons/ArrowForwardIos';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Logo from '../../components/Logo';
 import InputField from '../../components/InputField';
 import UserName from '../../components/UserName';
 import Selfie from '../../assets/Selfie@3x.png';
 import useGlobalStyles from '../../styles/defaultStyles';
+import { logout } from '../../store/middlewares/signup/signup.actions';
 
 const useStyles = makeStyles((theme) => ({
   selfieIcon: {
@@ -115,10 +117,9 @@ const initialStateEditUser: IEditUser = {
 const EditUser: React.FC = () => {
   const classes = useStyles();
   const globalClasses = useGlobalStyles();
+  const dispatch = useDispatch();
   const [editUser, setEditUser] = useState<IEditUser>(initialStateEditUser);
-  useEffect(() => {
-    document.body.style.backgroundColor = '#FFFFFF';
-  }, []);
+
   const testingHandleEditButton = (name: string, value: string) => {
     console.log(name, value);
     setEditUser({
@@ -261,7 +262,11 @@ const EditUser: React.FC = () => {
         nameInput="socialMedia"
       />
       <div className={globalClasses.alignItemsColumn}>
-        <Button size="large" className={classes.button}>
+        <Button
+          onClick={() => dispatch(logout())}
+          size="large"
+          className={classes.button}
+        >
           Logout
           <ArrowForward className={globalClasses.extendedIcon} />
         </Button>
