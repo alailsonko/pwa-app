@@ -1,17 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import * as yup from 'yup';
 import ArrowForward from '@material-ui/icons/ArrowForwardIos';
 import { makeStyles, alpha, withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
+import { useDispatch } from 'react-redux';
 import Logo from '../../components/Logo';
 import UserName from '../../components/UserName';
 import Error from '../../components/Error';
 import User from '../../assets/User@3x.png';
 import PasswordIcon from '../../assets/Password@3x.png';
 import useGlobalStyles from '../../styles/defaultStyles';
+import { signup } from '../../store/middlewares/signup/signup.actions';
 
 const BootstrapInput = withStyles((theme) => ({
   input: {
@@ -87,6 +89,7 @@ interface IRegisterData {
 const Register: React.FC = () => {
   const classes = useStyles();
   const globalClasses = useGlobalStyles();
+  const dispatch = useDispatch();
   const [error, setError] = useState<string>(
     'Ooops! Your username must contain only letters, numbers and spaces.'
   );
@@ -168,6 +171,14 @@ const Register: React.FC = () => {
               isValid: true,
             },
           });
+          if (registerData.username && registerData.password) {
+            dispatch(
+              signup({
+                username: registerData.username.value,
+                password: registerData.password.value,
+              })
+            );
+          }
           console.log('success');
         })
         .catch((err: Error) => {
