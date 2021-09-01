@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
   inputWrapper: {
     position: 'relative',
+    marginBottom: '15px',
   },
   iconWrapper: {
     position: 'absolute',
