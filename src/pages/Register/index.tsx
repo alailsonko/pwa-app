@@ -7,6 +7,7 @@ import ArrowForward from '@material-ui/icons/ArrowForwardIos';
 import { makeStyles, alpha, withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import { useDispatch } from 'react-redux';
+import ArrowBack from '@material-ui/icons/ArrowBackIos';
 import Logo from '../../components/Logo';
 import UserName from '../../components/UserName';
 import Error from '../../components/Error';
@@ -53,6 +54,14 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     width: '270px',
   },
+  navWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    position: 'relative',
+  },
+  backButton: {
+    position: 'absolute',
+  },
 }));
 
 const schemaUsername = yup.object().shape({
@@ -86,27 +95,28 @@ interface IRegisterData {
   passwordConfirm?: IValid;
 }
 
+const initialRegisterData = {
+  username: {
+    value: '',
+    isValid: false,
+  },
+  password: {
+    value: '',
+    isValid: false,
+  },
+  passwordConfirm: {
+    value: '',
+    isValid: false,
+  },
+};
+
 const Register: React.FC = () => {
   const classes = useStyles();
   const globalClasses = useGlobalStyles();
   const dispatch = useDispatch();
-  const [error, setError] = useState<string>(
-    'Ooops! Your username must contain only letters, numbers and spaces.'
-  );
-  const [registerData, setRegisterData] = useState<IRegisterData>({
-    username: {
-      value: '',
-      isValid: false,
-    },
-    password: {
-      value: '',
-      isValid: false,
-    },
-    passwordConfirm: {
-      value: '',
-      isValid: false,
-    },
-  });
+  const [error, setError] = useState<string>('');
+  const [registerData, setRegisterData] =
+    useState<IRegisterData>(initialRegisterData);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -209,7 +219,27 @@ const Register: React.FC = () => {
   return (
     <>
       <div className={globalClasses.container}>
-        <Logo />
+        <div className={classes.navWrapper}>
+          {registerData.username && registerData.username.isValid ? (
+            <Button
+              size="small"
+              className={classes.backButton}
+              onClick={() => {
+                setRegisterData(initialRegisterData);
+              }}
+            >
+              <ArrowBack
+                style={{
+                  color: '#FFFFFF',
+                  position: 'absolute',
+                  left: '-90px',
+                }}
+              />
+            </Button>
+          ) : null}
+
+          <Logo />
+        </div>
         <UserName classStyle={globalClasses.h2} title="John Cena" />
         {registerData.username && !registerData.username.isValid ? (
           <div className={globalClasses.alignItemsColumn}>
