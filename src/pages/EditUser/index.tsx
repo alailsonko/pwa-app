@@ -186,6 +186,7 @@ const EditUser: React.FC<Props> = (props: Props) => {
         initialValue={`${session.name} ${session.surname}`}
         labelName="name"
         nameInput="name"
+        isDeleteRequired={false}
       />
       <InputField
         field={editUser.username}
@@ -197,6 +198,7 @@ const EditUser: React.FC<Props> = (props: Props) => {
         initialValue={session.displayName}
         labelName="Username"
         nameInput="username"
+        isDeleteRequired={false}
       />
       <InputField
         field={editUser.address}
@@ -208,6 +210,7 @@ const EditUser: React.FC<Props> = (props: Props) => {
         initialValue={`${session.contact.locations[0].address.streetName} ${session.contact.locations[0].address.streetNumber}`}
         labelName="Address"
         nameInput="address"
+        isDeleteRequired
       />
       <InputField
         field={editUser.city}
@@ -219,6 +222,7 @@ const EditUser: React.FC<Props> = (props: Props) => {
         initialValue={session.contact.locations[0].address.suburb}
         labelName="City"
         nameInput="city"
+        isDeleteRequired
       />
       <InputField
         field={editUser.postalCode}
@@ -230,6 +234,7 @@ const EditUser: React.FC<Props> = (props: Props) => {
         initialValue={session.contact.locations[0].address.postalCode}
         labelName="Postal Code"
         nameInput="postalCode"
+        isDeleteRequired
       />
       <InputField
         field={editUser.email}
@@ -241,6 +246,7 @@ const EditUser: React.FC<Props> = (props: Props) => {
         initialValue={session.contact.email}
         labelName="E-mail"
         nameInput="email"
+        isDeleteRequired
       />
       <InputField
         field={editUser.phoneNumber}
@@ -252,6 +258,7 @@ const EditUser: React.FC<Props> = (props: Props) => {
         initialValue={session.contact.phoneNumber}
         labelName="Phone"
         nameInput="phoneNumber"
+        isDeleteRequired
       />
       <InputField
         field={editUser.socialMedia}
@@ -263,6 +270,7 @@ const EditUser: React.FC<Props> = (props: Props) => {
         initialValue={session.contact.socialNetworks[0].name}
         labelName="Social Media"
         nameInput="socialMedia"
+        isDeleteRequired
       />
       <div className={globalClasses.alignItemsColumn}>
         <Button

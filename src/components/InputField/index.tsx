@@ -68,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
     left: '17px',
     top: '-8px',
   },
+  margin: {
+    marginLeft: '58.88px',
+  },
 }));
 
 interface Props {
@@ -79,6 +82,7 @@ interface Props {
   nameInput: string;
   initialValue: string;
   labelName: string;
+  isDeleteRequired: boolean;
   handleEditButton(name: string, value: string): void;
   handleCancelButton(name: string): void;
   handleSaveButton(name: string, value: string): void;
@@ -97,6 +101,7 @@ const InputField: React.FC<Props> = (props: Props) => {
     nameInput,
     initialValue,
     labelName,
+    isDeleteRequired,
   } = props;
   return (
     <div className={classes.inputWrapper}>
@@ -140,10 +145,15 @@ const InputField: React.FC<Props> = (props: Props) => {
       />
       {field && !field.isEditing ? (
         <>
-          <Button className={classes.deleteButton}>Delete</Button>
+          {isDeleteRequired ? (
+            <Button className={classes.deleteButton}>Delete</Button>
+          ) : null}
           <Button
             onClick={() => handleEditButton(nameInput, initialValue)}
             className={classes.editButton}
+            classes={{
+              root: isDeleteRequired ? classes.editButton : classes.margin,
+            }}
           >
             Edit
           </Button>
