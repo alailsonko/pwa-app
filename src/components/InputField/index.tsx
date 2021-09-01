@@ -63,6 +63,11 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(2.4),
     right: '0',
   },
+  labelPosition: {
+    position: 'absolute',
+    left: '17px',
+    top: '-8px',
+  },
 }));
 
 interface Props {
@@ -96,7 +101,12 @@ const InputField: React.FC<Props> = (props: Props) => {
   return (
     <div className={classes.inputWrapper}>
       {field && !field.isEditing ? (
-        <InputLabel shrink htmlFor={nameInput}>
+        <InputLabel
+          classes={{ root: classes.labelPosition }}
+          className={classes.labelPosition}
+          shrink
+          htmlFor={nameInput}
+        >
           {labelName}
         </InputLabel>
       ) : null}
@@ -117,7 +127,7 @@ const InputField: React.FC<Props> = (props: Props) => {
         style={
           field && !field.isEditing
             ? {
-                width: '210px',
+                width: '240px',
               }
             : field && field.isEditing
             ? {
