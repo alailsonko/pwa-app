@@ -271,7 +271,10 @@ const EditUser: React.FC<Props> = (props: Props) => {
         handleEditButton={handleEditButton}
         handleOnChange={handleOnChange}
         idInput="phoneNumber"
-        initialValue={session.contact.phoneNumber}
+        initialValue={session.contact.phoneNumber.replace(
+          /^(.{3})(.{3})(.*)$/,
+          '+420 $1 $2 $3'
+        )}
         labelName="Phone"
         nameInput="phoneNumber"
         isDeleteRequired
