@@ -63,8 +63,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   iconsWrapper: {
-    alignSelf: 'flex-start',
-    marginLeft: '26px',
+    marginLeft: '-247px',
     marginBottom: '30px',
   },
   iconSize: {
