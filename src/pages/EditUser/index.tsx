@@ -4,6 +4,8 @@ import ArrowBack from '@material-ui/icons/ArrowBackIos';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import ArrowForward from '@material-ui/icons/ArrowForwardIos';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
 import { useDispatch, connect } from 'react-redux';
 import Logo from '../../components/Logo';
 import InputField from '../../components/InputField';
@@ -59,6 +61,21 @@ const useStyles = makeStyles((theme) => ({
       color: '#EA573E',
       boxShadow: 'none',
     },
+  },
+  iconsWrapper: {
+    alignSelf: 'flex-start',
+    marginLeft: '26px',
+    marginBottom: '30px',
+  },
+  iconSize: {
+    width: '30px',
+    height: '30px',
+  },
+  iconButtonWrapper: {
+    width: '30px',
+    height: '30px',
+    marginRight: '7px',
+    minWidth: '0',
   },
 }));
 
@@ -123,7 +140,7 @@ const EditUser: React.FC<Props> = (props: Props) => {
   const dispatch = useDispatch();
   const [editUser, setEditUser] = useState<IEditUser>(initialStateEditUser);
   const { session } = props;
-  const testingHandleEditButton = (name: string, value: string) => {
+  const handleEditButton = (name: string, value: string) => {
     console.log(name, value);
     setEditUser({
       ...editUser,
@@ -133,10 +150,10 @@ const EditUser: React.FC<Props> = (props: Props) => {
       },
     });
   };
-  const testingHandleCancelButton = (name: string) => {
+  const handleCancelButton = (name: string) => {
     console.log(name);
   };
-  const testingHandleSaveButton = (name: string, value: string) => {
+  const handleSaveButton = (name: string, value: string) => {
     console.log(name, value);
     setEditUser({
       ...editUser,
@@ -146,7 +163,7 @@ const EditUser: React.FC<Props> = (props: Props) => {
       },
     });
   };
-  const testingHandleOnChange = (name: string, value: string) => {
+  const handleOnChange = (name: string, value: string) => {
     console.log(name, value);
     setEditUser({
       ...editUser,
@@ -178,10 +195,10 @@ const EditUser: React.FC<Props> = (props: Props) => {
 
       <InputField
         field={editUser.name}
-        handleCancelButton={testingHandleCancelButton}
-        handleSaveButton={testingHandleSaveButton}
-        handleEditButton={testingHandleEditButton}
-        handleOnChange={testingHandleOnChange}
+        handleCancelButton={handleCancelButton}
+        handleSaveButton={handleSaveButton}
+        handleEditButton={handleEditButton}
+        handleOnChange={handleOnChange}
         idInput="name"
         initialValue={`${session.name} ${session.surname}`}
         labelName="name"
@@ -190,10 +207,10 @@ const EditUser: React.FC<Props> = (props: Props) => {
       />
       <InputField
         field={editUser.username}
-        handleCancelButton={testingHandleCancelButton}
-        handleSaveButton={testingHandleSaveButton}
-        handleEditButton={testingHandleEditButton}
-        handleOnChange={testingHandleOnChange}
+        handleCancelButton={handleCancelButton}
+        handleSaveButton={handleSaveButton}
+        handleEditButton={handleEditButton}
+        handleOnChange={handleOnChange}
         idInput="username"
         initialValue={session.displayName}
         labelName="Username"
@@ -202,10 +219,10 @@ const EditUser: React.FC<Props> = (props: Props) => {
       />
       <InputField
         field={editUser.address}
-        handleCancelButton={testingHandleCancelButton}
-        handleSaveButton={testingHandleSaveButton}
-        handleEditButton={testingHandleEditButton}
-        handleOnChange={testingHandleOnChange}
+        handleCancelButton={handleCancelButton}
+        handleSaveButton={handleSaveButton}
+        handleEditButton={handleEditButton}
+        handleOnChange={handleOnChange}
         idInput="address"
         initialValue={`${session.contact.locations[0].address.streetName} ${session.contact.locations[0].address.streetNumber}`}
         labelName="Address"
@@ -214,10 +231,10 @@ const EditUser: React.FC<Props> = (props: Props) => {
       />
       <InputField
         field={editUser.city}
-        handleCancelButton={testingHandleCancelButton}
-        handleSaveButton={testingHandleSaveButton}
-        handleEditButton={testingHandleEditButton}
-        handleOnChange={testingHandleOnChange}
+        handleCancelButton={handleCancelButton}
+        handleSaveButton={handleSaveButton}
+        handleEditButton={handleEditButton}
+        handleOnChange={handleOnChange}
         idInput="city"
         initialValue={session.contact.locations[0].address.suburb}
         labelName="City"
@@ -226,10 +243,10 @@ const EditUser: React.FC<Props> = (props: Props) => {
       />
       <InputField
         field={editUser.postalCode}
-        handleCancelButton={testingHandleCancelButton}
-        handleSaveButton={testingHandleSaveButton}
-        handleEditButton={testingHandleEditButton}
-        handleOnChange={testingHandleOnChange}
+        handleCancelButton={handleCancelButton}
+        handleSaveButton={handleSaveButton}
+        handleEditButton={handleEditButton}
+        handleOnChange={handleOnChange}
         idInput="postalCode"
         initialValue={session.contact.locations[0].address.postalCode}
         labelName="Postal Code"
@@ -238,10 +255,10 @@ const EditUser: React.FC<Props> = (props: Props) => {
       />
       <InputField
         field={editUser.email}
-        handleCancelButton={testingHandleCancelButton}
-        handleSaveButton={testingHandleSaveButton}
-        handleEditButton={testingHandleEditButton}
-        handleOnChange={testingHandleOnChange}
+        handleCancelButton={handleCancelButton}
+        handleSaveButton={handleSaveButton}
+        handleEditButton={handleEditButton}
+        handleOnChange={handleOnChange}
         idInput="email"
         initialValue={session.contact.email}
         labelName="E-mail"
@@ -250,10 +267,10 @@ const EditUser: React.FC<Props> = (props: Props) => {
       />
       <InputField
         field={editUser.phoneNumber}
-        handleCancelButton={testingHandleCancelButton}
-        handleSaveButton={testingHandleSaveButton}
-        handleEditButton={testingHandleEditButton}
-        handleOnChange={testingHandleOnChange}
+        handleCancelButton={handleCancelButton}
+        handleSaveButton={handleSaveButton}
+        handleEditButton={handleEditButton}
+        handleOnChange={handleOnChange}
         idInput="phoneNumber"
         initialValue={session.contact.phoneNumber}
         labelName="Phone"
@@ -262,16 +279,34 @@ const EditUser: React.FC<Props> = (props: Props) => {
       />
       <InputField
         field={editUser.socialMedia}
-        handleCancelButton={testingHandleCancelButton}
-        handleSaveButton={testingHandleSaveButton}
-        handleEditButton={testingHandleEditButton}
-        handleOnChange={testingHandleOnChange}
+        handleCancelButton={handleCancelButton}
+        handleSaveButton={handleSaveButton}
+        handleEditButton={handleEditButton}
+        handleOnChange={handleOnChange}
         idInput="socialMedia"
         initialValue={session.contact.socialNetworks[0].name}
         labelName="Social Media"
         nameInput="socialMedia"
         isDeleteRequired
       />
+      <div className={classes.iconsWrapper}>
+        <Button
+          classes={{
+            root: classes.iconButtonWrapper,
+          }}
+          type="button"
+        >
+          <FacebookIcon className={classes.iconSize} />
+        </Button>
+        <Button
+          classes={{
+            root: classes.iconButtonWrapper,
+          }}
+          type="button"
+        >
+          <TwitterIcon className={classes.iconSize} />
+        </Button>
+      </div>
       <div className={globalClasses.alignItemsColumn}>
         <Button
           onClick={() => dispatch(logout())}
