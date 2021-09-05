@@ -10,19 +10,17 @@ import useGlobalStyles from '../../styles/defaultStyles';
 const Home: React.FC = () => {
   const globalClasses = useGlobalStyles();
   return (
-    <>
-      <div className={globalClasses.container}>
-        <Logo />
-        <UserName classStyle={globalClasses.h2} title="John Cena" />
-        <WelcomeMessage />
-        <Link to="/register" className={globalClasses.alignItemsColumn}>
-          <Button size="large" className={globalClasses.button}>
-            Start
-            <ArrowForward className={globalClasses.extendedIcon} />
-          </Button>
-        </Link>
-      </div>
-    </>
+    <div className={globalClasses.container}>
+      <Logo />
+      <UserName classStyle={globalClasses.h2} title="John Cena" />
+      <WelcomeMessage />
+      <Link to="/register" className={globalClasses.alignItemsColumn}>
+        <Button size="large" className={globalClasses.button}>
+          Start
+          <ArrowForward className={globalClasses.extendedIcon} />
+        </Button>
+      </Link>
+    </div>
   );
 };
 
